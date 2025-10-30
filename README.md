@@ -2,9 +2,9 @@
 <img width="450" height="802" alt="Screenshot 2025-10-18 004430" src="https://github.com/user-attachments/assets/2cc56973-2279-4dd5-92f9-1d97b69af81f" />
 
 ### Link to Excel File:
-**Pre-Update**: https://1drv.ms/x/c/4815cd31ccfbf255/EZxmYqP-ZIZNjt9W5-kX_LsBvJxNas3XkGbK3OBhbs50mQ?e=EWUbXm
+**Pre-Update**: https://1drv.ms/x/c/4815cd31ccfbf255/EUDynAK9XgVMsIeZp3PYVR8BuzmbZUceBGYD-fdtmKhoOQ?e=8d6Fnz
 
-**Post-Update**: https://1drv.ms/x/c/4815cd31ccfbf255/EYEuWrIxzSpKmD1ho3LHKtcBz6fvTyiXVSTDSqtXDD_tEw?e=QKSy6K
+**Post-Update**: https://1drv.ms/x/c/4815cd31ccfbf255/EYEuWrIxzSpKmD1ho3LHKtcBz6fvTyiXVSTDSqtXDD_tEw?e=cC8LWz
 __________________________________________________________________________________________________________________________________________________________________
 ### The task
 During my time as an intern in Knoxville Utilities Board's fiber department, I was tasked with creating a script to conduct daily automated updates of their Excel
@@ -23,6 +23,9 @@ allows future programmers who will inevitably modify this script at a later date
 #### Files:
 
 _main.py_ - Main file of the script that is responsible for running every component of the automation process.
+
+_check_backup_directory_and_run_time_log.py_ - File that contains functionality for verifying that the current month's backup directory and script run time logs
+                                               exist. If they do not exist, then the file creates a directory and log for the current month.
 
 _update_main_and_archive.py_ - File that contains all functionality responsible for importing rows from the main sheet to the archive sheet and subsequently
                                removing imported rows from the main sheet. This file operates through the Pandas library.
