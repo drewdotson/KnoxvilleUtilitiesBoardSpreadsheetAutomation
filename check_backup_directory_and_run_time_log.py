@@ -5,7 +5,7 @@
 from datetime import datetime
 import os
 
-# Function used for assinging a month key to the current date. It uses the current date in mm-dd-YYYY format as input.
+# Function used for assigning a month key to the current date. It uses the current date in mm-dd-YYYY format as input.
 def create_month_key(current_date):
 
     # A dictionary is created to assign month identifiers to a month string. This is used to create a month title for the current 
@@ -32,7 +32,7 @@ def create_month_key(current_date):
     # invalid date input is given.)
     if month in month_dict:
 
-        # The month key is created by concatenating the  current month's key value with the year component. The month key is then returned.
+        # The month key is created by concatenating the current month's key value with the year component. The month key is then returned.
         month_key = month_dict[month] + " " + year
         return month_key
 
@@ -61,3 +61,4 @@ def check_backup_directory_and_run_time_log():
 
     # The current date and generated month key are generated.
     return current_date, month_key
+
