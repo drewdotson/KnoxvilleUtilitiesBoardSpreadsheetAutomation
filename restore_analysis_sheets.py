@@ -1,7 +1,9 @@
+
 # The purpose of this file is to restore the pre-update format of the area metrics and month-by-month metrics 
 # analysis sheets.
 
 from openpyxl.styles import Alignment, PatternFill, Font, Border, Side
+
 
 # FUNCTIONS 👇 ---------------------------------------------------------------------------------------------------#
 
@@ -103,19 +105,19 @@ def apply_column_color(sheet, row_limit):
         if sheet['C' + str(row)].value == 'N/A':
             sheet['C' + str(row)].fill = grey_fill
 
-        # If the row has a value that is less than 7, the cell will be filled with green.
-        elif sheet['C' + str(row)].value < 7:
+        # If the row has a value that is less than 3, the cell will be filled with green.
+        elif sheet['C' + str(row)].value < 3:
             sheet['C' + str(row)].fill = green_fill
         
-        # If the row has a value between 7 and 14, the cell will be filled with light green.
-        elif 7 <= sheet['C' + str(row)].value <= 14:
+        # If the row has a value between 3 and 5, the cell will be filled with light green.
+        elif 3 <= sheet['C' + str(row)].value <= 5:
             sheet['C' + str(row)].fill = light_green_fill
 
-        # If the row has a value greater than 14 but not greater than 20, the cell will be filled with light red.
-        elif 14 < sheet['C' + str(row)].value <= 20:
+        # If the row has a value greater than 5 but not greater than 7, the cell will be filled with light red.
+        elif 5 < sheet['C' + str(row)].value <= 7:
             sheet['C' + str(row)].fill = light_red_fill
         
-        # If the row has a value greater than 20, the cell will be filled with red.
+        # If the row has a value greater than 7, the cell will be filled with red.
         else:
             sheet['C' + str(row)].fill = red_fill
 
@@ -127,19 +129,19 @@ def apply_column_color(sheet, row_limit):
         if sheet['D' + str(row)].value == 'N/A':
             sheet['D' + str(row)].fill = grey_fill
 
-        # If the row has a value that is less than 7, the cell will be filled with green.
-        elif sheet['D' + str(row)].value < 7:
+        # If the row has a value that is less than 4, the cell will be filled with green.
+        elif sheet['D' + str(row)].value < 4:
             sheet['D' + str(row)].fill = green_fill
         
-        # If the row has a value between 7 and 14, the cell will be filled with light green.
-        elif 7 <= sheet['D' + str(row)].value <= 14:
+        # If the row has a value between 4 and 7, the cell will be filled with light green.
+        elif 4 <= sheet['D' + str(row)].value <= 7:
             sheet['D' + str(row)].fill = light_green_fill
 
-        # If the row has a value greater than 14 but not greater than 20, the cell will be filled with light red.
-        elif 14 < sheet['D' + str(row)].value <= 20:
+        # If the row has a value greater than 7 but not greater than 10, the cell will be filled with light red.
+        elif 7 < sheet['D' + str(row)].value <= 10:
             sheet['D' + str(row)].fill = light_red_fill
         
-        # If the row has a value greater than 20, the cell will be filled with red.
+        # If the row has a value greater than 10, the cell will be filled with red.
         else:
             sheet['D' + str(row)].fill = red_fill
 
@@ -189,6 +191,7 @@ def restore_borders(sheet, row_limit):
 # input.
 def restore_filters(sheet, row_limit):
     sheet.auto_filter.ref = f"A1:H{row_limit}"
+
 
 # MAIN FUNCTIONALITY 👇 -----------------------------------------------------------------------------------------#
 

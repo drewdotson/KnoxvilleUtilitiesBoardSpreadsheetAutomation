@@ -1,6 +1,8 @@
+
 # The purpose of this file is to restore the pre-update format of the main and archive sheets.
 
 from openpyxl.styles import Alignment, PatternFill, Font, Border, Side
+
 
 # FUNCTIONS 👇 ---------------------------------------------------------------------------------------------------#
 
@@ -227,6 +229,13 @@ def restore_legend(main_sheet):
         for cell in row:
             cell.font = Font(name='Calibri', size=12)
 
+
+# Function used for restoring the filter tabs in each column. It uses a specified sheet name and its row limit as
+# input.
+def restore_filters(sheet, row_limit):
+    sheet.auto_filter.ref = f"A1:N{row_limit}"
+
+
 # MAIN FUNCTIONALITY 👇 -----------------------------------------------------------------------------------------#
 
 def restore_main_and_archive(main_sheet, archive_sheet):
@@ -246,6 +255,10 @@ def restore_main_and_archive(main_sheet, archive_sheet):
     # Restore the cell fill colors of both sheets.
     restore_column_color(main_sheet, main_row_limit)
     restore_column_color(archive_sheet, archive_row_limit)
+
+    # Restore the cell borders of both sheets.
+    restore_borders(main_sheet, main_row_limit)
+    restore_borders(archive_sheet, archive_row_limit)
 
     # Restore the cell borders of both sheets.
     restore_borders(main_sheet, main_row_limit)
