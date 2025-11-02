@@ -5,7 +5,7 @@
 from datetime import datetime
 import os
 
-# Function used for assigning a month key to the current date. It uses the current date in mm-dd-YYYY format as input.
+# Function used for assinging a month key to the current date. It uses the current date in mm-dd-YYYY format as input.
 def create_month_key(current_date):
 
     # A dictionary is created to assign month identifiers to a month string. This is used to create a month title for the current 
@@ -32,7 +32,7 @@ def create_month_key(current_date):
     # invalid date input is given.)
     if month in month_dict:
 
-        # The month key is created by concatenating the current month's key value with the year component. The month key is then returned.
+        # The month key is created by concatenating the  current month's key value with the year component. The month key is then returned.
         month_key = month_dict[month] + " " + year
         return month_key
 
@@ -47,18 +47,15 @@ def check_backup_directory_and_run_time_log():
     month_key = create_month_key(current_date)
 
     # The function checks if the current month already has a backup directory present. If not, then one is created.
-    if os.path.isdir(f"Backups/{month_key}"):
-        pass
-    else:
-        os.mkdir(f"Backups/{month_key}")
-    
-    # The function checks if the current month already has a run time log present. If not, then one is created.
-    if os.path.isdir(f"Run Times/{month_key}.txt"):
-        pass
-    else:
-        with open(f'Run Times\\{month_key}.txt', 'w') as f:
-            f.write(f"Run Time Archive for {month_key}")
+    os.makedirs(f'Backups/{month_key}', exist_ok=True)
+ 
+    # The function checks if a run time log directory exists. If not, then one is created.
+    os.makedirs(f'Run Times', exist_ok=True)
 
+    # The function checks if the current month already has a run time log present. If not, then one is created.
+    if not os.path.exists(f'Run Times\\{month_key}.txt'):
+        with open(f'Run Times\\{month_key}.txt', 'w') as f:
+                f.write(f"Run Time Archive for {month_key}")
+ 
     # The current date and generated month key are generated.
     return current_date, month_key
-
