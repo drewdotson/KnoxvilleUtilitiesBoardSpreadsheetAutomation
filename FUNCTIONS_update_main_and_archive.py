@@ -16,6 +16,7 @@ def format_main_sheet_dates(main_sheet):
     main_sheet['811 Called in Date'] = main_sheet.apply(lambda row: pd.to_datetime(row['811 Called in Date'], errors='ignore'), axis=1)
     main_sheet['Begin Work On'] = main_sheet.apply(lambda row: pd.to_datetime(row['Begin Work On'], errors='ignore'), axis=1)
     main_sheet['811 Marked Date'] = main_sheet.apply(lambda row: pd.to_datetime(row['811 Marked Date'], errors='ignore'), axis=1)
+    main_sheet['Update By'] = main_sheet.apply(lambda row: pd.to_datetime(row['Update By'], errors='ignore'), axis=1)
     main_sheet['Ticket Expiration Date'] = main_sheet.apply(lambda row: pd.to_datetime(row['Ticket Expiration Date'], errors='ignore'), axis=1)
     main_sheet['Job Completed Date'] = main_sheet.apply(lambda row: pd.to_datetime(row['Job Completed Date'], errors='ignore'), axis=1) 
 
@@ -29,6 +30,7 @@ def format_archive_sheet_dates(archive_sheet):
     archive_sheet['811 Called in Date'] = archive_sheet.apply(lambda row: pd.to_datetime(row['811 Called in Date'], errors='coerce'), axis=1)
     archive_sheet['Begin Work On'] = archive_sheet.apply(lambda row: pd.to_datetime(row['Begin Work On'], errors='coerce'), axis=1)
     archive_sheet['811 Marked Date'] = archive_sheet.apply(lambda row: pd.to_datetime(row['811 Marked Date'], errors='coerce'), axis=1)
+    archive_sheet['Update By'] = archive_sheet.apply(lambda row: pd.to_datetime(row['Update By'], errors='coerce'), axis=1)
     archive_sheet['Ticket Expiration Date'] = archive_sheet.apply(lambda row: pd.to_datetime(row['Ticket Expiration Date'], errors='coerce'), axis=1)
     archive_sheet['Job Completed Date'] = archive_sheet.apply(lambda row: pd.to_datetime(row['Job Completed Date'], errors='coerce'), axis=1)  
 
@@ -38,9 +40,9 @@ def format_archive_sheet_dates(archive_sheet):
 def completion_check(row, current_date):
     
     # The value of the "Status" column in the specified row is saved to a variable
-    status = row[14]
+    status = row[15]
     # The value of the "Job Completed Date" column in the specified row is saved as a variable.
-    completion_date = row[6]
+    completion_date = row[7]
 
     # The "Status" column's value is checked to see if the value equals the string "completed" (case-insensitive).
     if type(status) == str and status.lower() == "completed":

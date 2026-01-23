@@ -33,7 +33,7 @@ def create_area_dict(sheet_name):
     for row in sheet_name[first_row:last_row + 1].itertuples():
         
         # The value in the "CO" column (which contains the area ID abbreviations) is assigned as the area key for the specified row
-        area_key = row[8]
+        area_key = row[9]
 
         # To ensure that the area key is of the correct format, the value's data type is checked to see if it is a string.
         if type(area_key) == str:
@@ -87,7 +87,7 @@ def add_start_to_complete_times_dict(times_dict, sheet_name):
         # The job time value is check to see if:
         #   1. There is an actual job time value present
         #   2. The date type of the row's area ID column is a string
-        if job_time is not None and type(area_ID := row[8]) == str:
+        if job_time is not None and type(area_ID := row[9]) == str:
 
             # The value of the area ID column is checked to see if it matches a key present in the times dictionary.
             area_ID = area_ID.strip().upper()
@@ -135,7 +135,7 @@ def add_call811_to_mark811_times_dict(times_dict, sheet_name):
         # The call to mark time value is check to see if:
         #   1. There is an actual call to mark time value present
         #   2. The date type of the row's area ID column is a string
-        if mark811_time is not None and type(area_ID := row[8]) == str:
+        if mark811_time is not None and type(area_ID := row[9]) == str:
 
             # The value of the area ID column is checked to see if it matches a key present in the times dictionary.
             area_ID = area_ID.strip().upper()
@@ -183,7 +183,7 @@ def add_mark811_to_complete_times_dict(times_dict, sheet_name):
         # The job completion time value is check to see if:
         #   1. There is an actual mark to job completion time value present
         #   2. The date type of the row's area ID column is a string
-        if complete_post_mark_time is not None and type(area_ID := row[8]) == str:
+        if complete_post_mark_time is not None and type(area_ID := row[9]) == str:
 
             # The value of the area ID column is checked to see if it matches a key present in the times dictionary.
             area_ID = area_ID.strip().upper()

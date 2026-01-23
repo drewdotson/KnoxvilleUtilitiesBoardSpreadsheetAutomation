@@ -10,14 +10,14 @@ from datetime import datetime
 def start_to_complete_time_check(row):
 
     # The value of the "Status" column in the specified row is saved to a variable
-    status = row[14]
+    status = row[15]
 
     # The "Status" column's value is checked to see if the value equals the string "completed" (case-insensitive).
     if type(status) == str and status.lower() == "completed": 
 
             # The values of the "Drop Installation Date" and "Job Completed Date" columns in the specified row are saved to variables.
             job_start = row[1]
-            job_complete = row[6]
+            job_complete = row[7]
 
             # The data types of both date values are check to see if they are either pandas timestamp or datetime objects.
             if type(job_start) == pd._libs.tslibs.timestamps.Timestamp or type(job_start) == datetime:
@@ -25,12 +25,12 @@ def start_to_complete_time_check(row):
 
                     # If both variables are one of the two data types, then the job's completion time is calculated and saved to a variable.
                     # the two times.
-                    difference = str(job_complete - job_start).split(" ")
+                    difference = job_complete - job_start
 
                     # To avoid both outliers and date typos, for example a job taking a year to complete, only job completion times of between 0 
                     # and 100 days are returned.
-                    if 0 <= int(difference[0]) <= 100:
-                        return int(difference[0])
+                    if 0 <= difference.days <= 100:
+                        return difference.days
 
 
 # Function used to check the amount of time (in days) a fiber installation job took to be marked after an 811 call was made. This function is 
@@ -48,12 +48,12 @@ def call811_to_mark811_time_check(row):
         if type(job_mark811) == pd._libs.tslibs.timestamps.Timestamp or type(job_mark811) == datetime:
  
             # If both variables are one of the two data types, then the job's call to mark time is calculated and saved to a variable.
-            difference = str(job_mark811 - job_call811).split(" ")
+            difference = job_mark811 - job_call811
 
             # To avoid both outliers and date typos, for example a call taking a year to be marked, only call to mark times of between 0 and 
             # 100 days are returned.
-            if 0 <= int(difference[0]) <= 100:
-                return int(difference[0])
+            if 0 <= difference.days <= 100:
+                return difference.days
         
 
 # Function used to check the amount of time (in days) a fiber installation job took to be completed after an  811 call was marked. This function 
@@ -64,16 +64,16 @@ def mark811_to_complete_time_check(row):
 
     # The values of the "811 Mark Date" and "Job Completed Date" columns in the specified row are saved to variables.
     job_mark811 = row[4]
-    job_complete = row[6]
+    job_complete = row[7]
 
     # The data types of both date values are check to see if they are either pandas timestamp or datetime objects.
     if type(job_mark811) == pd._libs.tslibs.timestamps.Timestamp or type(job_mark811) == datetime:
         if type(job_complete) == pd._libs.tslibs.timestamps.Timestamp or type(job_complete) == datetime:
  
             # If both variables are one of the two data types, then the job's mark to completion time is calculated and saved to a variable.
-            difference = str(job_complete - job_mark811).split(" ")
+            difference = job_complete - job_mark811
 
             # To avoid both outliers and date typos, for example a marked job taking a year to be completed, only 
             # mark to completion times of between 0 and 100 days are returned.
-            if 0 <= int(difference[0]) <= 100:
-                return int(difference[0])
+            if 0 <= difference.days <= 100:
+                return difference.days
