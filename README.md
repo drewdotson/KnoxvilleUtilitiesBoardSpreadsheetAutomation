@@ -1,6 +1,6 @@
 # Knoxville Utilities Board Spreadsheet Automation
 
-During my internship in Knoxville Utilities Board’s Fiber Department, I developed a Python script to automate daily updates of their fiber installation job data in Excel. The script archived jobs that were completed for over 90 days and generated multiple analysis sheets containing many time-based analysis metrics. (All data used is sample data, not real customer information.)
+During my time working in Knoxville Utilities Board’s Fiber Department, I developed a Python script to automate daily updates of their fiber installation job data in Excel. The script archived jobs that were completed for over 90 days and generated multiple analysis sheets containing many time-based analysis metrics. (All data used is sample data, not real customer information.)
     
 **DISCLAIMER: None of the data in the version of the Excel file or Python script present contains real customer data as I have replaced it with sample data.**
 
