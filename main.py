@@ -1,8 +1,8 @@
 
-# This is an automation script I wrote during my time as an intern at Knoxville Utilities Board's fiber 
+# This is an automation script I wrote during my time working in Knoxville Utilities Board's fiber 
 # department. What this script does is automates the update of the four following sheets in the Fiber Installations
 # Database Excel Spreadsheet:
-#   - Main installation job data sheet (currently titled "Main Installs")
+#   - Main installation job data sheet (currently titled "Installation Jobs")
 #   - Installation job archive sheet of jobs completed for at least 90 days (currently titled ">90 Day Archive")
 #   - Analysis sheet used to house specific job metrics for each work area present in the spreadsheet (currently 
 #     titled "Area Metrics")
@@ -39,7 +39,7 @@ sleep(1)
 
 # Load the Excel file in OpenpyXL
 print("\nLoading Excel file in OpenpyXL...")
-workbook = load_workbook("Fiber Installations Database - Pre Update.xlsx")
+workbook = load_workbook("Installations Database.xlsx")
 print("\nExcel file loaded in OpenpyXL!")
 sleep(1)
 
@@ -56,8 +56,8 @@ warnings.filterwarnings('ignore', category=FutureWarning)
 
 # Load the main and archive sheets as Pandas dataframes
 print("\nLoading Excel sheets in Pandas...")
-df_main = pd.read_excel("Fiber Installations Database - Pre Update.xlsx", sheet_name='Main Installs')
-df_90day = pd.read_excel("Fiber Installations Database - Pre Update.xlsx", sheet_name='>90 Day Archive')
+df_main = pd.read_excel("Installations Database.xlsx", sheet_name='Installation Jobs')
+df_90day = pd.read_excel("Installations Database.xlsx", sheet_name='>90 Day Archive')
 print("\nExcel sheets loaded in Pandas!")
 sleep(1)
 
@@ -81,12 +81,12 @@ sleep(1)
 
 # Save changes made by Pandas functionality to Excel file.
 print("\nSaving Pandas modifications...")
-with pd.ExcelWriter("Fiber Installations Database - Post Update.xlsx",
+with pd.ExcelWriter("Installations Database.xlsx",
                     engine='openpyxl',
                     mode='a',
                     if_sheet_exists='replace') as writer:
         
-    updated_main.to_excel(writer, sheet_name='Main Installs', index=False)
+    updated_main.to_excel(writer, sheet_name='Installation Jobs', index=False)
     updated_90day.to_excel(writer, sheet_name='>90 Day Archive', index=False)
     updated_area_metrics.to_excel(writer, sheet_name='Area Metrics', index=False)
     updated_month_metrics.to_excel(writer, sheet_name='Month-by-Month Metrics', index=False)
@@ -98,8 +98,8 @@ sleep(1)
 
 # Load all four modified sheets in OpenpyXL.
 print("\nLoading Excel sheets in OpenpyXL...")
-workbook = load_workbook("Fiber Installations Database - Post Update.xlsx")
-main_sheet = workbook['Main Installs']
+workbook = load_workbook("Installations Database.xlsx")
+main_sheet = workbook['Installation Jobs']
 archive_sheet = workbook['>90 Day Archive']
 area_metrics_sheet = workbook['Area Metrics']
 month_metrics_sheet = workbook['Month-by-Month Metrics']
@@ -108,7 +108,7 @@ sleep(1)
 
 # Restore the main and archive sheet formating.
 print("\nRestoring main and archive sheet formatting...")
-restore_main_and_archive(main_sheet, archive_sheet)
+restore_main_and_archive(main_sheet, archive_sheet, workbook)
 print("\nMain and archive sheet formatting restored!")
 sleep(1)
 
@@ -120,7 +120,7 @@ sleep(1)
 
 # Save changes made by OpenpyXL functionality to Excel file.
 print("\nSaving OpenpyXL modifications...")
-workbook.save("Fiber Installations Database - Post Update.xlsx")
+workbook.save("Installations Database.xlsx")
 print("\nOpenpyXL modifications saved!")
 
 # Display the run time of the current iteration of the automation process.

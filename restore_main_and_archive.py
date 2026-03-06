@@ -16,6 +16,9 @@ def restore_main_and_archive(main_sheet, archive_sheet, workbook):
     function.restore_font_details(main_sheet)
     function.restore_font_details(archive_sheet)
 
+    function.restore_phone_numbers(main_sheet)
+    function.restore_phone_numbers(archive_sheet)
+
     # Restore the cell fill colors of both sheets.
     function.restore_column_color(main_sheet)
     function.restore_column_color(archive_sheet)

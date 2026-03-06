@@ -45,7 +45,7 @@ def create_area_dict(sheet_name):
             #   1. The value is already present in the dictionary as a key
             #   2. The length of the value is 2 characters (All work area IDs are two letters wrong)
             # If the value meets both conditions, then it is added as a key in the dictionary with an empty list as its value.
-            if area_key not in area_dict and len(area_key) == 2:
+            if area_key not in area_dict and 2 <= len(area_key) <= 3:
                 area_dict[area_key] = []
 
     # After the function iterates over every row in the Excel sheet, the area ID dictionary is returned.

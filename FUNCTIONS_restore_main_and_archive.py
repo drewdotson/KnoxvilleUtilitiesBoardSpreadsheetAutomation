@@ -6,13 +6,13 @@ import FUNCTIONS_cell_color as colors
 from openpyxl.worksheet.datavalidation import DataValidation
 from openpyxl.workbook.defined_name import DefinedName
 from openpyxl.formatting.rule import FormulaRule
-
+import re
 
 # FUNCTIONS 👇 ---------------------------------------------------------------------------------------------------#
 
 
 # Function used for restoring each row's height and each column's width to their original values. It takes a 
-# specified sheet name and its row limit as input.
+# specified sheet name as input.
 def restore_height_and_width(sheet_name):
 
     # The header row is given a height value of 35
@@ -61,7 +61,7 @@ def restore_height_and_width(sheet_name):
             )
 
 
-# Function used to restore font details of each column. It takes a specified sheet name and its row limit as input.
+# Function used to restore font details of each column. It takes a specified sheet name as input.
 def restore_font_details(sheet_name):
 
     # Restore font details of the header row.
@@ -93,9 +93,29 @@ def restore_font_details(sheet_name):
             cell.font = Font(name='Arial', size=16, bold=True)
 
 
+# Function used for restoring cell phone number formats in the "Contact #" column. It takes a sheet name as input.
+def restore_phone_numbers(sheet_name):
+
+    # Iterate over each non-header row and get the contact phone number value for each row.
+    for row in range(2, sheet_name.max_row + 1):
+        cell = sheet_name[f"K{row}"]
+
+        # The the "Contact #" column has a value, convert the value into a numeric format.
+        if cell.value:
+            
+            # Remove all non numeric entries.
+            digits = re.sub(r"\D", "", str(cell.value))
+
+            # If the length of the stripped value is 10 digits, convert the value into an integer.
+            if len(digits) == 10:
+                cell.value = int(digits)
+        
+        # Format the value as a cell phone number format.
+        cell.number_format = "(###) ###-####"
+
 
 # Function used for restoring the cell fill color to each cell in the "Job Completed Date" and "Address" columns. It
-# takes a sheet name and its row limit as input.
+# takes a sheet name as input.
 def restore_column_color(sheet_name):
 
     # Iterate over the 'Status' column in each row of the specified sheet.
@@ -234,7 +254,7 @@ def restore_column_color(sheet_name):
             sheet_name['N' + str(row)].fill = colors.ut_orange
 
 
-# Function used for restoring borders to cells. It uses a specified sheet name and its row limit as input.
+# Function used for restoring borders to cells. It uses a specified sheet name as input.
 def restore_borders(sheet_name):
 
     # Create the border.
@@ -251,8 +271,7 @@ def restore_borders(sheet_name):
             cell.border = border
 
 
-# Function used for restoring the filter tabs in each column. It uses a specified sheet name and its row limit as
-# input.
+# Function used for restoring the filter tabs in each column. It uses a specified sheet name as input.
 def restore_filters(sheet_name):
     sheet_name.auto_filter.ref = f"A1:O{sheet_name.max_row}"
 
@@ -396,8 +415,7 @@ def restore_legend(main_sheet):
             cell.font = Font(name='Calibri', size=12)
 
 
-# Function used for restoring the filter tabs in each column. It uses a specified sheet name and its row limit as
-# input.
+# Function used for restoring the filter tabs in each column. It uses a specified sheet name as input.
 def restore_filters(sheet_name):
     sheet_name.auto_filter.ref = f"A1:O{sheet_name.max_row}"
     sheet_name.freeze_panes = "A2"

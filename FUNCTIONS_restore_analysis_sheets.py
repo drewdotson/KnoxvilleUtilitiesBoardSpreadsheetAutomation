@@ -103,7 +103,7 @@ def apply_column_color(sheet_name, row_limit):
             sheet_name['C' + str(row)].fill = colors.green
         
         # If the row has a value between 3 and 5, the cell will be filled with light green.
-        elif 3 <= sheet_name['C' + str(row)].value <= 5:
+        elif 3 <= sheet_name['C' + str(row)].value <= 6:
             sheet_name['C' + str(row)].fill = colors.light_green
 
         # If the row has a value greater than 5 but not greater than 7, the cell will be filled with light red.
